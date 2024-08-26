@@ -26,5 +26,5 @@ export declare class JsReportTemplateService {
         'Content-Disposition': string;
         'Content-Length': number;
     };
-    streamFile(res: Response, data?: {}, options?: JsReportRenderOptions): Promise<StreamableFile>;
+    streamFile(res: Response, data?: {}, options?: JsReportRenderOptions, result?: JsReportResult): Promise<StreamableFile>;
 }

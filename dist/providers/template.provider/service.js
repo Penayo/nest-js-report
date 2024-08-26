@@ -161,9 +161,11 @@ class JsReportTemplateService {
             'Content-Length': result.content.byteLength,
         };
     }
-    async streamFile(res, data = {}, options = { pdf: false }) {
+    async streamFile(res, data = {}, options = { pdf: false }, result) {
         const { pdf, fileName } = options;
-        const result = await this.render(data, pdf);
+        if (!result) {
+            result = await this.render(data, pdf);
+        }
         res.set(this.getContentHeaders(result, pdf, fileName));
         return new common_1.StreamableFile(result.stream);
     }
