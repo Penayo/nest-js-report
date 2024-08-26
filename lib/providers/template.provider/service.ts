@@ -238,6 +238,7 @@ export class JsReportTemplateService {
 
   setResult(result: JsReportResult) {
     this.result = result;
+    return this;
   }
 
   async streamFile(

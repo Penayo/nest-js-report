@@ -163,6 +163,7 @@ class JsReportTemplateService {
     }
     setResult(result) {
         this.result = result;
+        return this;
     }
     async streamFile(res, data = {}, options = { pdf: false }) {
         const { pdf, fileName } = options;
