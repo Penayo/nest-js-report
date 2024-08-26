@@ -239,9 +239,14 @@ export class JsReportTemplateService {
     res: Response,
     data = {},
     options: JsReportRenderOptions = { pdf: false },
+    result?: JsReportResult
   ) {
     const { pdf, fileName } = options;
-    const result = await this.render(data, pdf);
+ 
+    if (!result) {
+      result = await this.render(data, pdf);
+    }
+
     res.set(this.getContentHeaders(result, pdf, fileName));
     return new StreamableFile(result.stream as any);
   }
