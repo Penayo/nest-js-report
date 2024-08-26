@@ -11,6 +11,7 @@ export declare class JsReportTemplateService {
     readonly instance: JsReport.Reporter;
     private assetsInitialized;
     private templateInitialized;
+    private result;
     constructor(options: JsReportTemplateOptions, instance: JsReport.Reporter);
     asset: AssetHelper;
     template: TemplateHelper;
@@ -26,5 +27,6 @@ export declare class JsReportTemplateService {
         'Content-Disposition': string;
         'Content-Length': number;
     };
-    streamFile(res: Response, data?: {}, options?: JsReportRenderOptions, result?: JsReportResult): Promise<StreamableFile>;
+    setResult(result: JsReportResult): void;
+    streamFile(res: Response, data?: {}, options?: JsReportRenderOptions): Promise<StreamableFile>;
 }

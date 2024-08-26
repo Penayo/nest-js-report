@@ -161,13 +161,16 @@ class JsReportTemplateService {
             'Content-Length': result.content.byteLength,
         };
     }
-    async streamFile(res, data = {}, options = { pdf: false }, result) {
+    setResult(result) {
+        this.result = result;
+    }
+    async streamFile(res, data = {}, options = { pdf: false }) {
         const { pdf, fileName } = options;
-        if (!result) {
-            result = await this.render(data, pdf);
+        if (!this.result) {
+            this.result = await this.render(data, pdf);
         }
-        res.set(this.getContentHeaders(result, pdf, fileName));
-        return new common_1.StreamableFile(result.stream);
+        res.set(this.getContentHeaders(this.result, pdf, fileName));
+        return new common_1.StreamableFile(this.result.stream);
     }
 }
 exports.JsReportTemplateService = JsReportTemplateService;

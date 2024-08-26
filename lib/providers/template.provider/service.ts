@@ -13,6 +13,7 @@ import { JsReportRenderOptions } from '../../types';
 export class JsReportTemplateService {
   private assetsInitialized = false;
   private templateInitialized = false;
+  private result: JsReportResult;
 
   constructor(
     private readonly options: JsReportTemplateOptions,
@@ -235,19 +236,22 @@ export class JsReportTemplateService {
     };
   }
 
+  setResult(result: JsReportResult) {
+    this.result = result;
+  }
+
   async streamFile(
     res: Response,
     data = {},
     options: JsReportRenderOptions = { pdf: false },
-    result?: JsReportResult
   ) {
     const { pdf, fileName } = options;
  
-    if (!result) {
-      result = await this.render(data, pdf);
+    if (!this.result) {
+      this.result = await this.render(data, pdf);
     }
 
-    res.set(this.getContentHeaders(result, pdf, fileName));
-    return new StreamableFile(result.stream as any);
+    res.set(this.getContentHeaders(this.result, pdf, fileName));
+    return new StreamableFile(this.result.stream as any);
   }
 }
