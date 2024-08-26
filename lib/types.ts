@@ -28,6 +28,7 @@ export type JsReportResult = Response & {
     reportName: string;
     fileExtension: string;
     contentType: string;
+    contentDisposition?: string;
     officeDocumentType: string;
     logs: any[];
     profileId: string;

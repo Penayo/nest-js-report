@@ -157,7 +157,7 @@ class JsReportTemplateService {
             'Content-Type': pdf
                 ? 'application/pdf'
                 : `${result.meta.contentType}; charset=utf-8`,
-            'Content-Disposition': `attachment; filename="${fileName || result.meta.reportName}.${pdf ? 'pdf' : this.getDefaultType()}"`,
+            'Content-Disposition': `${result.meta.contentDisposition || 'attachment'}; filename="${fileName || result.meta.reportName}.${pdf ? 'pdf' : this.getDefaultType()}"`,
             'Content-Length': result.content.byteLength,
         };
     }
